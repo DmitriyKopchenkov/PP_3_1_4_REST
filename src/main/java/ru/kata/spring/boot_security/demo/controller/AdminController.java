@@ -10,6 +10,10 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.security.Principal;
+import java.util.List;
+import java.util.Set;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
@@ -23,12 +27,10 @@ public class AdminController {
         this.roleService = roleService;
     }
 
-
-
     @GetMapping
     public String printUsers(Model model) {
         model.addAttribute("userList", userService.listUsers());
-        return "user";
+        return "all_users";
     }
 
     @PostMapping

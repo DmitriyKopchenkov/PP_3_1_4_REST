@@ -28,6 +28,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final SuccessUserHandler successUserHandler;
     private final UserDetailsService userDetailsService;
 
+    // SuccessHandler это обработчик успешной аутентификации
+    // UserDetails - минимальная информация о пользователях (логин, пароль и тд)
+
     @Autowired
     public WebSecurityConfig(SuccessUserHandler successUserHandler
             , @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
@@ -41,12 +44,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    protected PasswordEncoder passwordEncoder() {
+    protected PasswordEncoder passwordEncoder() { // энкодер паролей
         return new BCryptPasswordEncoder(12);
     }
 
     @Bean
-    protected DaoAuthenticationProvider daoAuthenticationProvider() {
+    protected DaoAuthenticationProvider daoAuthenticationProvider() { // сверяет userDetailsService с поступившим юзером
         DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
@@ -54,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception { // конфиги в которых указывается доступы пользователей
         http
                 .csrf().disable() //  защита от CSRF-атак
                 .authorizeRequests() //авторизацуем запрос
@@ -64,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
                 .and()
                 .formLogin() // задаю форму для ввода логина-пароля, по дефолту это "/login"
-                .successHandler(successUserHandler) // successHandler это обработчик успешной аутентификации
+                .successHandler(successUserHandler)
                 .permitAll() // доступно всем
                 .and()
                 .logout().permitAll(); // настройка логаута
