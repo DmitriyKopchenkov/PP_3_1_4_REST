@@ -11,7 +11,7 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Выйти">
     </form>
-    <hr/>
+    <br/>
     <form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
         <fieldset>
             <legend>Данные пользователя</legend>
@@ -44,13 +44,13 @@
                 </label>
             </p>
         </fieldset>
-        <button type="submit">Изменить данные</button>
+        <button style="background: lightgray" type="submit">Изменить данные</button>
     </form>
 
 
     <br/>
     <form th:action="@{/admin/users}">
-        <button type="submit">Назад к списку пользователей</button>
+        <button style="background: lightgray" type="submit">Назад к списку пользователей</button>
     </form>
 </div>
 </body>

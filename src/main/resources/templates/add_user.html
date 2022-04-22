@@ -10,7 +10,7 @@
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Выйти">
     </form>
-    <hr/>
+    <br>
     <form method="POST" th:action="@{/admin/users/add}" th:object="${user}">
         <fieldset>
             <legend>Данные пользователя</legend>
@@ -36,11 +36,11 @@
             </p>
         </fieldset>
         <br/>
-        <button type="submit">Сохранить пользователя</button>
+        <button style="background: lightgray" type="submit">Сохранить пользователя</button>
     </form>
     <br/>
     <form th:action="@{/admin}">
-        <button type="submit" class="btn btn-outline-danger">Назад к списку пользователей</button>
+        <button style="background: lightgray" type="submit" class="btn btn-outline-danger">Назад к списку пользователей</button>
     </form>
 </div>
 </body>

@@ -14,7 +14,7 @@ import java.util.List;
 @Transactional
 public class UserServiceImpl implements UserService {
 
-
+    BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
     private final UserDao userDao;
 
     @Autowired
@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUser(User user) {
-        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
         userDao.addUser(user);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
     }

@@ -1,9 +1,9 @@
 package ru.kata.spring.boot_security.demo.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
@@ -72,6 +72,14 @@ public class AdminController {
     public String deleteUserById(@PathVariable("id") long id) {
         userService.removeUserById(id);
         return "redirect:/admin/users";
+    }
+
+    // show user by id
+
+    @GetMapping("users/{id}")
+    public String show(@PathVariable("id") Long id, ModelMap modelMap) {
+        modelMap.addAttribute("user", userService.getUserById(id));
+        return "user_info_by_id";
     }
 
 }
