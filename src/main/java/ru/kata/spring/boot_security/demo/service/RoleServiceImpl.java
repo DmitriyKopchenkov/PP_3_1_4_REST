@@ -7,7 +7,6 @@ import ru.kata.spring.boot_security.demo.dao.RoleDao;
 import ru.kata.spring.boot_security.demo.model.Role;
 
 
-import java.util.HashSet;
 import java.util.List;
 
 @Service
@@ -33,8 +32,8 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public HashSet<Role> getSetOfRoles(String[] roleNames) {
-        return roleDao.getSetOfRoles(roleNames);
+    public List<Role> getListOfRoles(String[] roleNames) {
+        return roleDao.getListOfRoles(roleNames);
     }
 
     @Override
