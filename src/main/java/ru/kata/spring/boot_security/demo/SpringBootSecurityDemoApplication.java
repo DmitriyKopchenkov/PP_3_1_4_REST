@@ -10,7 +10,9 @@ import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.RoleService;
 import ru.kata.spring.boot_security.demo.service.UserService;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @SpringBootApplication
@@ -32,11 +34,11 @@ public class SpringBootSecurityDemoApplication {
 			Role roleAdmin = new Role("ROLE_ADMIN");
 			Role roleUser = new Role("ROLE_USER");
 
-			Set<Role> roles1 = new HashSet<>();
+			List<Role> roles1 = new ArrayList<>();
 			roles1.add(roleAdmin);
 			roles1.add(roleUser);
 
-			Set<Role> roles2 = new HashSet<>();
+			List<Role> roles2 = new ArrayList<>();
 			roles2.add(roleUser);
 
 			user1.setRoles(roles1);

@@ -16,15 +16,15 @@
             <legend>Данные пользователя</legend>
             <p>
                 <label th:for="name">Имя</label>
-                <input type="text" name="name" th:id="name">
+                <input type="text" name="name" th:id="name" th:value="${user.getName()}">
             </p>
             <p>
                 <label th:for="lastName">Фамилия</label>
-                <input type="text" name="lastName" th:id="lastName"><br/>
+                <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}"><br/>
             </p>
             <p>
                 <label th:for="email">Электронная почта</label>
-                <input type="text" name="email" th:id="email"><br/>
+                <input type="text" name="email" th:id="email" th:value="${user.getEmail()}"><br/>
             </p>
             <p>
                 <label th:for="password">Пароль</label>

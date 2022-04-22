@@ -12,11 +12,11 @@ public interface UserDao {
 
     public void addUser(User user);
 
-    public User getUserById(int id);
+    public User getUserById(long id);
 
     public User updateUser(User user);
 
-    public void removeUserById(int id);
+    public void removeUserById(long id);
 
     public List<User> listUsers();
 }

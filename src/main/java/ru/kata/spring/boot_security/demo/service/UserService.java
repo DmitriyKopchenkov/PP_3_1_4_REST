@@ -10,11 +10,11 @@ public interface UserService {
 
     public void addUser(User user);
 
-    public User getUserById(int id);
+    public User getUserById(long id);
 
     public void updateUser(User user);
 
-    public void removeUserById(int id);
+    public void removeUserById(long id);
 
     public List<User> listUsers();
 }
