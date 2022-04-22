@@ -7,11 +7,12 @@
 <body>
 <h2>Изменить пользователя</h2>
 <div>
+
     <form th:action="@{/logout}" method="post">
         <input type="submit" value="Выйти">
     </form>
     <hr/>
-    <form th:action="@{/admin/users/add}" method="post">
+    <form th:method="PATCH" th:action="@{/admin/users/{id}/edit(id=${user.getId()})}" th:object="${user}">
         <fieldset>
             <legend>Данные пользователя</legend>
             <p>
@@ -23,7 +24,7 @@
                 <input type="text" name="lastName" th:id="lastName" th:value="${user.getLastName()}"><br/>
             </p>
             <p>
-                <label th:for="email">Электронная почта</label>
+                <label th:for="email">Почтовый ящик</label>
                 <input type="text" name="email" th:id="email" th:value="${user.getEmail()}"><br/>
             </p>
             <p>
@@ -48,7 +49,7 @@
 
 
     <br/>
-    <form th:action="@{/admin}">
+    <form th:action="@{/admin/users}">
         <button type="submit">Назад к списку пользователей</button>
     </form>
 </div>
