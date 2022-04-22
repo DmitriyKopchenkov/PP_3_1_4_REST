@@ -31,24 +31,29 @@ public class SpringBootSecurityDemoApplication {
 			User user2 = new User("user", "user", "user@mail.ru"
 					, bCryptPasswordEncoder.encode("user"));
 
+			User user3 = new User("ivan", "ivan", "ivan@mail.ru"
+					, bCryptPasswordEncoder.encode("ivan"));
+
 			Role roleAdmin = new Role("ROLE_ADMIN");
 			Role roleUser = new Role("ROLE_USER");
 
-			List<Role> roles1 = new ArrayList<>();
-			roles1.add(roleAdmin);
-			roles1.add(roleUser);
+			List<Role> rolesAdmUs = new ArrayList<>();
+			rolesAdmUs.add(roleAdmin);
+			rolesAdmUs.add(roleUser);
 
-			List<Role> roles2 = new ArrayList<>();
-			roles2.add(roleUser);
+			List<Role> rolesUs = new ArrayList<>();
+			rolesUs.add(roleUser);
 
-			user1.setRoles(roles1);
-			user2.setRoles(roles2);
+			user1.setRoles(rolesAdmUs);
+			user2.setRoles(rolesUs);
+			user3.setRoles(rolesUs);
 
 			roleService.add(roleAdmin);
 			roleService.add(roleUser);
 
 			userService.addUser(user1);
 			userService.addUser(user2);
+			userService.addUser(user3);
 
 		} catch (Exception ignored) {
 		}
