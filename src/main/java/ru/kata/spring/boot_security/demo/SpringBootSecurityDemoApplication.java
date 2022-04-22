@@ -26,11 +26,11 @@ public class SpringBootSecurityDemoApplication {
 			RoleService roleService = context.getBean(RoleService.class);
 
 			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
+
 			User user1 = new User("admin", "admin", "admin@mail.ru"
 					, bCryptPasswordEncoder.encode("admin"));
 			User user2 = new User("user", "user", "user@mail.ru"
 					, bCryptPasswordEncoder.encode("user"));
-
 			User user3 = new User("ivan", "ivan", "ivan@mail.ru"
 					, bCryptPasswordEncoder.encode("ivan"));
 
