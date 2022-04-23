@@ -25,7 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public WebSecurityConfig(SuccessUserHandler successUserHandler
-            , @Qualifier("userDetailsServiceImpl") UserDetailsService userDetailsService) {
+            , @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
         this.successUserHandler = successUserHandler;
         this.userDetailsService = userDetailsService;
     }
@@ -56,7 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/login", "/").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN") //прописываем доступ для юрл /admin/**
                 .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") //прописываем доступ для юрл /user/**
-//                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
+                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
                 .and()
                 .formLogin() // задаю форму для ввода логина-пароля, по дефолту это "/login"
                 .successHandler(successUserHandler)
