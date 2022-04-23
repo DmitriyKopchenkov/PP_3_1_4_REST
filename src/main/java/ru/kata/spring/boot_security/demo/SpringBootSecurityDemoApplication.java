@@ -25,11 +25,11 @@ public class SpringBootSecurityDemoApplication {
 
 			BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
-			User user1 = new User("admin", "admin", "admin@mail.ru"
+			User user1 = new User("admin", "admin", 25, "admin@mail.ru"
 					, bCryptPasswordEncoder.encode("admin"));
-			User user2 = new User("user", "user", "user@mail.ru"
+			User user2 = new User("user", "user", 33, "user@mail.ru"
 					, bCryptPasswordEncoder.encode("user"));
-			User user3 = new User("ivan", "ivan", "ivan@mail.ru"
+			User user3 = new User("ivan", "ivan", 40, "ivan@mail.ru"
 					, bCryptPasswordEncoder.encode("ivan"));
 
 			Role roleAdmin = new Role("ROLE_ADMIN");
