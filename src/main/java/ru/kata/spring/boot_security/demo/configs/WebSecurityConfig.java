@@ -24,10 +24,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     // UserDetails - минимальная информация о пользователях (логин, пароль и тд)
 
     @Autowired
-    public WebSecurityConfig(SuccessUserHandler successUserHandler
-            , @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
+    public WebSecurityConfig(SuccessUserHandler successUserHandler,
+                             @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
         this.successUserHandler = successUserHandler;
         this.userDetailsService = userDetailsService;
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception { // конфиги в которых указывается доступы пользователей
+        http
+                .csrf().disable() //  защита от CSRF-атак
+                .authorizeRequests() //авторизацуем запрос
+                .antMatchers("/login", "/").permitAll()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") //прописываем доступ для юрл /user/**
+                .antMatchers("/admin/**").hasRole("ADMIN") //прописываем доступ для юрл /admin/**
+                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
+                .and()
+                .formLogin() // задаю форму для ввода логина-пароля, по дефолту это "/login"
+                .successHandler(successUserHandler)
+                .permitAll() // доступно всем
+                .and()
+                .logout().permitAll(); // настройка логаута
     }
 
     @Override
@@ -46,22 +63,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
         daoAuthenticationProvider.setUserDetailsService(userDetailsService);
         return daoAuthenticationProvider;
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception { // конфиги в которых указывается доступы пользователей
-        http
-                .csrf().disable() //  защита от CSRF-атак
-                .authorizeRequests() //авторизацуем запрос
-                .antMatchers("/login", "/").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN") //прописываем доступ для юрл /admin/**
-                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") //прописываем доступ для юрл /user/**
-                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
-                .and()
-                .formLogin() // задаю форму для ввода логина-пароля, по дефолту это "/login"
-                .successHandler(successUserHandler)
-                .permitAll() // доступно всем
-                .and()
-                .logout().permitAll(); // настройка логаута
     }
 }
