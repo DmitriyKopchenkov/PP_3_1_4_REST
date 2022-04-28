@@ -188,13 +188,14 @@
                                 </div>
                                 <div class="d-flex flex-row bd-highlight">
                                     <div class="form-group">
-                                        <label for="newRole">Роли</label>
+                                        <label for="newRole">Ролии</label>
                                         <select id="newRole" class="custom-select bd-primary"
                                                 size="2" name="nameRoles" multiple="multiple">
-                                            <option th:each="role : ${roles}"
-                                                    th:value="${role.role}"
-                                                    th:text="${#strings.replace(role.role, 'ROLE_', '')}"
-                                                    th:selected="${role.role} == USER">
+                                            <option
+                                                    th:each="role : ${roles}"
+                                                    th:value="${role.name}"
+                                                    th:text="${role.name}"
+                                                    th:selected=“${user.getRoles().contains(role)}”>
                                             </option>
                                         </select>
                                     </div>
@@ -269,9 +270,9 @@
                                         <select id="editRole" class="custom-select bd-primary"
                                                 size="2" name="editRoles" multiple="multiple">
                                             <option th:each="role : ${roles}"
-                                                    th:value="${role.role}"
-                                                    th:text="${#strings.replace(role.role, 'ROLE_', '')}"
-                                                    th:selected="${role.role} == USER">
+                                                    th:value="${role.name}"
+                                                    th:text="${#strings.replace(role.name, 'ROLE_', '')}"
+                                                    th:selected="${role.name} == USER">
                                             </option>
                                         </select>
                                     </label>
