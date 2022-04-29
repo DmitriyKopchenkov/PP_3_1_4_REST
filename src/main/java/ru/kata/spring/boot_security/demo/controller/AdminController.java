@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -75,13 +74,4 @@ public class AdminController {
         userService.removeUserById(id);
         return "redirect:/admin/";
     }
-
-    // show user by id
-
-//    @GetMapping("users/{id}")
-//    public String show(@PathVariable("id") Long id, ModelMap modelMap) {
-//        modelMap.addAttribute("user", userService.getUserById(id));
-//        return "user_info_by_id";
-//    }
-
 }

@@ -64,7 +64,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link"
-                           th:classappend="${#httpServletRequest.getRequestURI().equals('/user') ? 'active bg-primary text-white' : ''}"
+                           th:classappend="${#httpServletRequest.getRequestURI().equals('/user/') ? 'active bg-primary text-white' : ''}"
                            href="#" th:href="@{/user}">Пользователь</a>
                     </li>
                 </ul>
@@ -188,7 +188,7 @@
                                 </div>
                                 <div class="d-flex flex-row bd-highlight">
                                     <div class="form-group">
-                                        <label for="newRole">Ролии</label>
+                                        <label for="newRole">Роли</label>
                                         <select id="newRole" class="custom-select bd-primary"
                                                 size="2" name="nameRoles" multiple="multiple">
                                             <option th:each="role : ${roleList}"
@@ -202,7 +202,7 @@
 
                                 <div class="d-flex flex-row bd-highlight">
                                     <div class="form-group">
-                                        <button type="submit" class="btn btn-success">Добавить пользователя
+                                        <button type="submit" class="btn btn-success">Добавить
                                         </button>
                                     </div>
                                 </div>
