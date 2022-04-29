@@ -61,7 +61,6 @@ public class AdminController {
 
     @PostMapping("/{id}")
     public String update(@ModelAttribute("user") User user,
-                         ModelMap model,
                          @PathVariable("id") long id,
                          @RequestParam(value = "editRoles") String[] roles) {
         user.setRoles(roleService.getSetOfRoles(roles));

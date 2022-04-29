@@ -186,19 +186,15 @@
                                         </label>
                                     </div>
                                 </div>
-
-<!--                                РАЗОБРАТЬСЯ С РОЛЯМИ-->
-
                                 <div class="d-flex flex-row bd-highlight">
                                     <div class="form-group">
                                         <label for="newRole">Ролии</label>
                                         <select id="newRole" class="custom-select bd-primary"
                                                 size="2" name="nameRoles" multiple="multiple">
-                                            <option
-                                                    th:each="role : ${roles}"
+                                            <option th:each="role : ${roleList}"
                                                     th:value="${role.name}"
-                                                    th:text="${role.name}"
-                                                    th:selected=“${user.getRoles().contains(role)}”>
+                                                    th:text="${#strings.replace(role.name, 'ROLE_', '')}"
+                                                    th:selected="${role.name} == USER">
                                             </option>
                                         </select>
                                     </div>
@@ -273,7 +269,7 @@
                                     <label>Роль:
                                         <select id="editRole" class="custom-select bd-primary"
                                                 size="2" name="editRoles" multiple="multiple">
-                                            <option th:each="role : ${roles}"
+                                            <option th:each="role : ${roleList}"
                                                     th:value="${role.name}"
                                                     th:text="${#strings.replace(role.name, 'ROLE_', '')}"
                                                     th:selected="${role.name} == USER">
