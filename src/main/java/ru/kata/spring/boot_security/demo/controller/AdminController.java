@@ -1,5 +1,6 @@
 package ru.kata.spring.boot_security.demo.controller;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -14,16 +15,11 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 @Controller
 @RequestMapping("/admin")
 @PreAuthorize("hasAuthority('ADMIN')")
+@AllArgsConstructor
 public class AdminController {
 
     private final UserService userService;
     private final RoleService roleService;
-
-    @Autowired
-    public AdminController(UserService userService, RoleService roleService) {
-        this.userService = userService;
-        this.roleService = roleService;
-    }
 
     // all users
 
@@ -35,7 +31,7 @@ public class AdminController {
         return "admin";
     }
 
-    // add
+    // add user
 
     @PostMapping
     public String createNewUser(@ModelAttribute("user") User user,
