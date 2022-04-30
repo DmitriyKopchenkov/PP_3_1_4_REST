@@ -1,11 +1,18 @@
 package ru.kata.spring.boot_security.demo.model;
 
+import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Entity
 @Table(name = "roles")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Role implements GrantedAuthority {
 
     @Id
@@ -14,32 +21,6 @@ public class Role implements GrantedAuthority {
 
     @Column(name = "name", unique = true, length = 100)
     private String name;
-
-    public Role() {}
-
-    public Role(long id) {
-        this.id = id;
-    }
-
-    public Role(String role) {
-        this.name = role;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String role) {
-        this.name = role;
-    }
 
     @Override
     public String getAuthority() {
@@ -50,4 +31,5 @@ public class Role implements GrantedAuthority {
     public String toString() {
         return name.replace("ROLE_", "");
     }
+
 }
