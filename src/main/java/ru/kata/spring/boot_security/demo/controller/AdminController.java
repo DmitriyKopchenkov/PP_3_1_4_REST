@@ -21,7 +21,7 @@ public class AdminController {
     private final UserService userService;
     private final RoleService roleService;
 
-    // all usersssss
+    // all user
 
     @GetMapping
     public String allUsers(@AuthenticationPrincipal org.springframework.security.core.userdetails.User user, Model model) {
