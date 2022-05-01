@@ -27,9 +27,6 @@ import java.util.Set;
 public class AdminController {
 
     private final UserService userService;
-    private final RoleService roleService;
-
-    // all user
 
     @GetMapping
     public List<User> showAllUsers() {
