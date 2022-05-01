@@ -33,8 +33,7 @@ public class AdminController {
 
     @GetMapping
     public List<User> showAllUsers() {
-        List<User> allUsers = userService.listUsers();
-        return allUsers;
+        return userService.listUsers();
     }
 
     @GetMapping("/{id}")
@@ -46,58 +45,24 @@ public class AdminController {
         return user;
     }
 
-    @ExceptionHandler // метод ответственный за обработку исключений (неверный id)
-    public ResponseEntity<UserIncorrectData> handleException(NoSuchUserException exception) {
-        UserIncorrectData data = new UserIncorrectData();
-        data.setInfo(exception.getMessage());
-        return new ResponseEntity<>(data, HttpStatus.NOT_FOUND);
+    @PostMapping
+    public List<User> createNewUser(@RequestBody User user) {
+        userService.addUser(user);
+        return userService.listUsers();
     }
 
-    @ExceptionHandler // метод ответственный за обработку исключений (остальные исключения)
-    public ResponseEntity<UserIncorrectData> handleException(Exception exception) {
-        UserIncorrectData data = new UserIncorrectData();
-        data.setInfo(exception.getMessage());
-        return new ResponseEntity<>(data, HttpStatus.BAD_REQUEST);
+    @PutMapping
+    public List<User> updateUser(@RequestBody User user) {
+        userService.updateUser(user);
+        return userService.listUsers();
     }
 
-
-//    // add user
-//
-//    @PostMapping
-//    public String createNewUser(@ModelAttribute("user") User user,
-//                                @RequestParam(value = "nameRoles") String[] roles) {
-//        user.setRoles(roleService.getSetOfRoles(roles));
-//        userService.addUser(user);
-//        return "redirect:/admin/";
-//    }
-//
-//    // edit users
-//
-//    @GetMapping("{id}/edit")
-//    public String editUserForm(@ModelAttribute("user") User user,
-//                               ModelMap model,
-//                               @PathVariable("id") long id,
-//                               @RequestParam(value = "editRoles") String[] roles) {
-//        user.setRoles(roleService.getSetOfRoles(roles));
-//        model.addAttribute("roles", roleService.getAllRoles());
-//        model.addAttribute("user", userService.getUserById(id));
-//        return "admin";
-//    }
-//
-//    @PostMapping("/{id}")
-//    public String update(@ModelAttribute("user") User user,
-//                         @PathVariable("id") long id,
-//                         @RequestParam(value = "editRoles") String[] roles) {
-//        user.setRoles(roleService.getSetOfRoles(roles));
-//        userService.updateUser(user);
-//        return "redirect:/admin/";
-//    }
-//
-//    // remove users
-//
-//    @GetMapping("/{id}/remove")
-//    public String deleteUserById(@PathVariable("id") long id) {
-//        userService.removeUserById(id);
-//        return "redirect:/admin/";
-//    }
+    @DeleteMapping("{id}")
+    public List<User> deleteUserById(@PathVariable("id") long id) {
+        if (userService.getUserById(id) == null) {
+            throw new NoSuchUserException("Нет пользователя с ID = " + id);
+        }
+        userService.removeUserById(id);
+        return userService.listUsers();
+    }
 }
