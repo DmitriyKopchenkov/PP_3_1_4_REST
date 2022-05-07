@@ -1,71 +1,68 @@
 package ru.kata.spring.boot_security.demo.service;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.repository.UserRep;
-
+import ru.kata.spring.boot_security.demo.repository.UserRepository;
 import java.util.List;
-@Service ("userEntityServiceImp")
-public class UserServiceImp implements UserService{
-    private final UserRep userRep;
-    @Autowired
-    public UserServiceImp(UserRep userRep) {
-        this.userRep = userRep;
-    }
 
+@Service ("userServiceImp")
+@AllArgsConstructor
+public class UserServiceImp implements UserService {
+
+    private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder(12);
 
     @Override
     public User add(User user) {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        return userRep.save(user);
+        return userRepository.save(user);
     }
 
     @Override
     public User update(User user, int id) {
-        User existingUser = userRep.findById(id).orElseThrow(
-                ()-> new RuntimeException("User is not found with update method in UserServiceImp class"));
+        User existingUser = userRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Пользователь не найден с помощью метода обновления в классе UserServiceImp"));
         existingUser.setName(user.getName());
         existingUser.setLastName(user.getLastName());
         existingUser.setAge(user.getAge());
         existingUser.setEmail(user.getEmail());
         existingUser.setRoles(user.getRoles());
-        return userRep.save(existingUser);
+        return userRepository.save(existingUser);
     }
 
     @Override
     public void delete(int id) {
-        User existingUser = userRep.findById(id).orElseThrow(
-                ()-> new RuntimeException("User is not found with update method in UserServiceImp class"));
-        userRep.delete(existingUser);
+        User existingUser = userRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Пользователь не найден с помощью метода удаления в классе UserServiceImp"));
+        userRepository.delete(existingUser);
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRep.findAll();
+        return userRepository.findAll();
     }
 
     @Override
     public User getById(int id) {
-        return userRep.findById(id).orElseThrow(
-                ()-> new RuntimeException("User is not found with update method in UserServiceImp class"));
+        return userRepository.findById(id).orElseThrow(
+                ()-> new RuntimeException("Пользователь с таким id не найден в классе UserServiceImp"));
     }
 
     @Override
     public User findByUsername(String email) {
-        return userRep.getUserByEmail(email);
+        return userRepository.getUserByEmail(email);
     }
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRep.getUserByEmail(email);
+        User user = userRepository.getUserByEmail(email);
         user.getAuthorities().size();
         if (user == null) {
-            throw new UsernameNotFoundException(String.format("User '%s' not found", email));
+            throw new UsernameNotFoundException(String.format("Пользователь с email = '%s' не найден", email));
         }
         return user.fromUser();
     }

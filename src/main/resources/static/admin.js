@@ -19,10 +19,11 @@ const renderUsers = (users) => {
                     <td> ${user.lastName} </td>
                     <td> ${user.age} </td>
                     <td> ${user.email} </td>
-                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : "Админ")} </td>
+                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : " Админ")} </td>
                     <td> <button type="button" class="btn btn-info" id="btn-edit-modal-call" data-toggle="modal" data-target="modal-edit"
-                    data-id="${user.id}">Edit</button></td>
-                    <td> <button type="button" class="btn btn-danger" id="btn-delete-modal-call" data-id="${user.id}">Delete</button></td>
+                    data-id="${user.id}">Изменить</button></td>
+                    <td> <button type="button" class="btn btn-danger" id="btn-delete-modal-call" 
+                    data-id="${user.id}">Удалить</button></td>
                 </tr>
         `
         })
@@ -71,14 +72,14 @@ function getRolesFromAddUserForm() {
     if (roles.includes("1")) {
         let role1 = {
             id: 1,
-            name: "ROLE_ADMIN"
+            name: "Админ"
         }
         rolesToAdd.push(role1);
     }
     if (roles.includes("2")) {
         let role2 = {
             id: 2,
-            name: "ROLE_USER"
+            name: "Юзер"
         }
         rolesToAdd.push(role2);
     }
@@ -356,7 +357,7 @@ let currentUser = () => {
                                     <td> ${user.lastName} </td>
                                     <td> ${user.age} </td>
                                     <td> ${user.email} </td>
-                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? "Юзер" : "Админ")} </td>
+                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : " Админ")} </td>
                                 </tr>
                         `
                 authorisedUserData.innerHTML = `

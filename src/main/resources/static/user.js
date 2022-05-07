@@ -18,11 +18,11 @@ let currentUser = () => {
                                     <td> ${user.lastName} </td>
                                     <td> ${user.age} </td>
                                     <td> ${user.email} </td>
-                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? "USER" : "ADMIN")} </td>
+                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? "Юзер" : "Админ")} </td>
                                 </tr>
                         `
                 currentAuthorisedUserData.innerHTML = `
-                    <p class="d-inline font-weight-bold">${user.email} with roles ${user.roles.map((role) => role.name === "ROLE_USER" ? "USER" : "ADMIN")}</p>`
+                    <p class="d-inline font-weight-bold">${user.email} с ролью ${user.roles.map((role) => role.name === "ROLE_USER" ? "Юзер" : "Админ")}</p>`
             }
         })
 }

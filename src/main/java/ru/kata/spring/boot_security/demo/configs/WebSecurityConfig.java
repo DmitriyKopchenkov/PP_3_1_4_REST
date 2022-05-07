@@ -16,20 +16,23 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private final UserDetailsService userDetailsService;
+
     private final SuccessUserHandler successUserHandler;
+    private final UserDetailsService userDetailsService;
+
+    // SuccessHandler это обработчик успешной аутентификации
+    // UserDetails - минимальная информация о пользователях (логин, пароль и тд)
 
     @Autowired
     public WebSecurityConfig(SuccessUserHandler successUserHandler,
-                             @Qualifier("userEntityServiceImp") UserDetailsService userDetailsService) {
+                             @Qualifier("userServiceImp") UserDetailsService userDetailsService) {
         this.successUserHandler = successUserHandler;
         this.userDetailsService = userDetailsService;
-
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder(10);
+        return new BCryptPasswordEncoder(12);
     }
 
     @Bean
@@ -48,19 +51,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .csrf().disable()
-                .authorizeRequests()
-                .antMatchers("/admin/**")
-                .hasRole("ADMIN")
-                .antMatchers("/user/**")
-                .hasAnyRole("ADMIN","USER")
-                .antMatchers("/login")      //здесь мы указываем url, доступ к которому мы настраиваем
-                .permitAll()    // имеют доступ любые пользователи.anyRequest().authenticated()
-                .and().formLogin()
-                .successHandler(successUserHandler)
-                .permitAll()
+                .csrf().disable() //  защита от CSRF-атак
+                .authorizeRequests() //авторизацуем запрос
+                .antMatchers("/login", "/").permitAll()
+                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") //прописываем доступ для юрл /user/**
+                .antMatchers("/admin/**").hasRole("ADMIN") //прописываем доступ для юрл /admin/**
+                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
                 .and()
-                .logout()
-                .permitAll();
+                .formLogin() // задаю форму для ввода логина-пароля, по дефолту это "/login"
+                .successHandler(successUserHandler)
+                .permitAll() // доступно всем
+                .and()
+                .logout().permitAll(); // настройка логаута
     }
 }
