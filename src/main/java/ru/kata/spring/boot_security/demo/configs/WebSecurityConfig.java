@@ -16,35 +16,28 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final SuccessUserHandler successUserHandler;
     private final UserDetailsService userDetailsService;
-
-    // SuccessHandler это обработчик успешной аутентификации
-    // UserDetails - минимальная информация о пользователях (логин, пароль и тд)
+    private final SuccessUserHandler successUserHandler;
 
     @Autowired
     public WebSecurityConfig(SuccessUserHandler successUserHandler,
-                             @Qualifier("userServiceImpl") UserDetailsService userDetailsService) {
+                             @Qualifier("userEntityServiceImp") UserDetailsService userDetailsService) {
         this.successUserHandler = successUserHandler;
         this.userDetailsService = userDetailsService;
+
     }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception { // конфиги в которых указывается доступы пользователей
-        http
-                .csrf().disable() //  защита от CSRF-атак
-                .authorizeRequests() //авторизацуем запрос
-                .antMatchers("/login", "/").permitAll()
-                .antMatchers("/user/**").hasAnyRole("USER", "ADMIN") //прописываем доступ для юрл /user/**
-                .antMatchers("/admin/**").hasRole("ADMIN") //прописываем доступ для юрл /admin/**
-                .anyRequest().authenticated() // все запросы должны быть авторизованы и аутентифицированы
-                .and()
-                .formLogin() // задаю форму для ввода логина-пароля, по дефолту это "/login"
-                .successHandler(successUserHandler)
-                .permitAll() // доступно всем
-                .and()
-                .logout().permitAll(); // настройка логаута
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
+
+    @Bean
+    protected DaoAuthenticationProvider daoAuthenticationProvider () {
+        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
+        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
+        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
+        return daoAuthenticationProvider;
     }
 
     @Override
@@ -52,16 +45,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
-    @Bean
-    protected PasswordEncoder passwordEncoder() { // энкодер паролей
-        return new BCryptPasswordEncoder(12);
-    }
-
-    @Bean
-    protected DaoAuthenticationProvider daoAuthenticationProvider() { // сверяет userDetailsService с поступившим юзером
-        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-        return daoAuthenticationProvider;
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeRequests()
+                .antMatchers("/admin/**")
+                .hasRole("ADMIN")
+                .antMatchers("/user/**")
+                .hasAnyRole("ADMIN","USER")
+                .antMatchers("/login")      //здесь мы указываем url, доступ к которому мы настраиваем
+                .permitAll()    // имеют доступ любые пользователи.anyRequest().authenticated()
+                .and().formLogin()
+                .successHandler(successUserHandler)
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 }
