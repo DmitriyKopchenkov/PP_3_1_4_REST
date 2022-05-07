@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>User information</title>
+    <title>Информация о пользователе</title>
 </head>
 <body>
 <!--Верхняя навигационная панель-->
@@ -16,7 +16,7 @@
         <!--        Заполнение из js-->
     </div>
     <div class="btn btn-link mr-0 col-1 ml-auto">
-        <a class="badge" style="color: grey" href="/logout">Logout</a>
+        <a class="badge" style="color: grey" href="/logout">Выйти</a>
     </div>
 </div>
 <div class="container-fluid">
@@ -29,21 +29,20 @@
                    sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')">User</a>
             </div>
 
-
             <!--                Панель юзера-->
             <div class="col-10">
                 <div class="card">
-                    <h5 class="card-header">About user</h5>
+                    <h5 class="card-header">О пользователе</h5>
                     <div class="card-body">
                         <table class="table table-striped">
                             <thead>
                             <tr>
-                                <th scope="col">Id</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Last name</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Role</th>
+                                <th scope="col">ID</th>
+                                <th scope="col">Имя</th>
+                                <th scope="col">Фамилия</th>
+                                <th scope="col">Возраст</th>
+                                <th scope="col">Электронная почта</th>
+                                <th scope="col">Роль</th>
                             </tr>
                             </thead>
 

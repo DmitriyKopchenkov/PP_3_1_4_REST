@@ -13,18 +13,18 @@ const renderUsers = (users) => {
         let temp = '';
         users.forEach((user) => {
             temp += `
-                                <tr>
-                                    <td> ${user.id} </td>
-                                    <td> ${user.name} </td>
-                                    <td> ${user.lastName} </td>
-                                    <td> ${user.age} </td>
-                                    <td> ${user.email} </td>
-                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? "USER" : "ADMIN")} </td>
-                                    <td> <button type="button" class="btn btn-info" id="btn-edit-modal-call" data-toggle="modal" data-target="modal-edit"
-                                    data-id="${user.id}">Edit</button></td>
-                                    <td> <button type="button" class="btn btn-danger" id="btn-delete-modal-call" data-id="${user.id}">Delete</button></td>
-                                </tr>
-                        `
+                <tr>
+                    <td> ${user.id} </td>
+                    <td> ${user.name} </td>
+                    <td> ${user.lastName} </td>
+                    <td> ${user.age} </td>
+                    <td> ${user.email} </td>
+                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : "Админ")} </td>
+                    <td> <button type="button" class="btn btn-info" id="btn-edit-modal-call" data-toggle="modal" data-target="modal-edit"
+                    data-id="${user.id}">Edit</button></td>
+                    <td> <button type="button" class="btn btn-danger" id="btn-delete-modal-call" data-id="${user.id}">Delete</button></td>
+                </tr>
+        `
         })
         allUsersTable.innerHTML = temp;
     }
@@ -156,14 +156,14 @@ function getRolesFromEditUserForm() {
     if (roles.includes("1")) {
         let role1 = {
             id: 1,
-            name: "ROLE_ADMIN"
+            name: "Админ"
         }
         rolesToEdit.push(role1);
     }
     if (roles.includes("2")) {
         let role2 = {
             id: 2,
-            name: "ROLE_USER"
+            name: "Юзер"
         }
         rolesToEdit.push(role2);
     }
@@ -356,11 +356,11 @@ let currentUser = () => {
                                     <td> ${user.lastName} </td>
                                     <td> ${user.age} </td>
                                     <td> ${user.email} </td>
-                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? "USER" : "ADMIN")} </td>
+                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? "Юзер" : "Админ")} </td>
                                 </tr>
                         `
                 authorisedUserData.innerHTML = `
-                    <p class="d-inline font-weight-bold">${user.email} with roles ${user.roles.map((role) => role.name === "ROLE_USER" ? "USER" : "ADMIN")}</p>`
+                    <p class="d-inline font-weight-bold">${user.email} с ролями ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : " Админ")}</p>`
             }
         })
 }

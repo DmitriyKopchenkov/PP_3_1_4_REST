@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>User information</title>
+    <title>Инфа о пользователях</title>
 </head>
 <body>
 <!--Верхняя навигационная панель-->
@@ -16,7 +16,7 @@
 <!--        Заполнение из js-->
     </div>
     <div class="btn btn-link mr-0 col-1 ml-auto">
-        <a class="badge" style="color: grey" href="/logout">Logout</a>
+        <a class="badge" style="color: grey" href="/logout">Выйти</a>
     </div>
 </div>
 <div class="container-fluid">
@@ -27,11 +27,11 @@
                 <!--Кнопка Admin в боковой панели-->
                 <a class="nav-link active" id="vertical_navigation-admin" data-toggle="tab" role="tab"
                    aria-controls="admin-panel" aria-selected="true"
-                   href="#admin_panel" sec:authorize="hasAuthority('ROLE_ADMIN')">Admin</a>
+                   href="#admin_panel" sec:authorize="hasAuthority('ROLE_ADMIN')">Администратор</a>
                 <!--Кнопка User в боковой панели-->
                 <a class="nav-link" id="vertical_navigation-user" data-toggle="tab" href="#user_panel" role="tab"
                    aria-controls="user-panel" aria-selected="false"
-                   sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')">User</a>
+                   sec:authorize="hasAnyAuthority('ROLE_USER', 'ROLE_ADMIN')">Пользователь</a>
             </div>
 
 
@@ -41,17 +41,17 @@
                 <!--Панель админа со списком всех юзеров-->
                 <div class="tab-pane fade show active" id="admin_panel">
                     <div class="col-10 justify-content-end">
-                        <h2>Admin panel</h2>
+                        <h2>Панель администратора</h2>
 
                         <!--Горизонтальная навигационная панель админа-->
                         <ul class="nav nav-tabs" role="tablist" id="horizontal_navigation">
                             <li class="nav-item">
                                 <a class="nav-link active" data-toggle="tab" href="#main"
-                                   id="horizontal_navigation-users_table">Users Table</a>
+                                   id="horizontal_navigation-users_table">Таблица пользователей</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" data-toggle="tab" href=#add_new_user
-                                   id="horizontal_navigation-new_user">New User</a>
+                                   id="horizontal_navigation-new_user">Новый пользователь</a>
                             </li>
                         </ul>
 
@@ -61,18 +61,18 @@
                             <!--Таблица юзеров-->
                             <div class="tab-pane fade show active" id="main">
                                 <div class="card">
-                                    <h5 class="card-header">All users</h5>
+                                    <h5 class="card-header">Все пользователи</h5>
                                     <div class="card-body">
                                         <table class="table table-striped">
                                             <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Last name</th>
-                                                <th>Age</th>
-                                                <th>Email</th>
-                                                <th>Role</th>
-                                                <th>Edit</th>
-                                                <th>Delete</th>
+                                                <th>ID</th>
+                                                <th>Имя</th>
+                                                <th>Фамилия</th>
+                                                <th>Возраст</th>
+                                                <th>Электронная почта</th>
+                                                <th>Роль</th>
+                                                <th>Изменить</th>
+                                                <th>Удалить</th>
                                             </tr>
                                             <tbody class="all-users-table">
 
@@ -86,7 +86,7 @@
 
                                                             <!--Заголовок-->
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Edit user</h5>
+                                                                <h5 class="modal-title">Изменение данных о пользователе</h5>
                                                                 <button id="exit_btn-modal-edit" type="button"
                                                                         class="close"
                                                                         data-dismiss="modal"
@@ -100,51 +100,51 @@
 
                                                                     <div class="form-group col-7" align="center">
                                                                         <label class="col-form-label"
-                                                                               for="edit-id">Id</label>
+                                                                               for="edit-id">ID</label>
                                                                         <input class="form-control edited-users-id"
                                                                                type="text" disabled id="edit-id"
                                                                                data-target="id"/>
                                                                     </div>
 
                                                                     <div class="form-group col-7">
-                                                                        <label class="col-form-label" for="edit-name">Name</label>
+                                                                        <label class="col-form-label" for="edit-name">Имя</label>
                                                                         <input class="form-control" type="text"
                                                                                id="edit-name"/>
                                                                     </div>
 
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="edit-lastName">Last Name</label>
+                                                                               for="edit-lastName">Фамилия</label>
                                                                         <input class="form-control" type="text"
                                                                                id="edit-lastName"/>
                                                                     </div>
 
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="edit-age">Age</label>
+                                                                               for="edit-age">Возраст</label>
                                                                         <input class="form-control" type="text"
                                                                                id="edit-age"/>
                                                                     </div>
 
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="edit-email">Email</label>
+                                                                               for="edit-email">Электронная почта</label>
                                                                         <input class="form-control" type="text"
                                                                                id="edit-email"/>
                                                                     </div>
 
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="edit-rolesSelect">Role</label>
+                                                                               for="edit-rolesSelect">Роль</label>
                                                                         <select id="edit-rolesSelect"
                                                                                 class="form-control" size="2" multiple
                                                                                 name="roles" required="required">
                                                                             <option id="edit-role_admin"
                                                                                     name="role_admin" value="1">
-                                                                                ROLE_ADMIN
+                                                                                Администратор
                                                                             </option>
                                                                             <option id="edit-role_user" value="2">
-                                                                                ROLE_USER
+                                                                                Пользователь
                                                                             </option>
                                                                         </select>
                                                                     </div>
@@ -154,12 +154,12 @@
                                                                 <button id="close_btn-modal-edit" type="button"
                                                                         class="btn btn-secondary"
                                                                         data-dismiss="modal">
-                                                                    Close
+                                                                    Закрыть
                                                                 </button>
                                                                 <button id="submit_btn-modal-edit" type="submit"
                                                                         class="btn btn-primary"
                                                                         data-target="#editForm">
-                                                                    Edit
+                                                                    Изменить
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -175,7 +175,7 @@
 
                                                             <!--Заголовок-->
                                                             <div class="modal-header">
-                                                                <h5 class="modal-title">Delete user</h5>
+                                                                <h5 class="modal-title">Удалить пользователя</h5>
                                                                 <button id="exit_btn-modal-delete" type="button"
                                                                         class="close"
                                                                         data-dismiss="modal"
@@ -188,43 +188,43 @@
                                                                 <div class="container-fluid" align="center">
                                                                     <div class="form-group col-7" align="center">
                                                                         <label class="col-form-label"
-                                                                               for="delete-id">Id</label>
+                                                                               for="delete-id">ID</label>
                                                                         <input class="form-control" type="text"
                                                                                id="delete-id" disabled/>
                                                                     </div>
                                                                     <div class="form-group col-7">
-                                                                        <label class="col-form-label" for="delete-name">Name</label>
+                                                                        <label class="col-form-label" for="delete-name">Имя</label>
                                                                         <input class="form-control" type="text"
                                                                                id="delete-name" disabled/>
                                                                     </div>
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="delete-lastName">Last Name</label>
+                                                                               for="delete-lastName">Фамилия</label>
                                                                         <input class="form-control" type="text"
                                                                                id="delete-lastName" disabled/>
                                                                     </div>
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="delete-age">Age</label>
+                                                                               for="delete-age">Возраст</label>
                                                                         <input class="form-control" type="text"
                                                                                id="delete-age" disabled/>
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="delete-email">Email</label>
+                                                                               for="delete-email">Электронная почта</label>
                                                                         <input class="form-control" type="text"
                                                                                id="delete-email" disabled/>
                                                                     </div>
                                                                     <div class="form-group col-7">
                                                                         <label class="col-form-label"
-                                                                               for="delete-roles">Role</label>
+                                                                               for="delete-roles">Роль</label>
                                                                         <select id="delete-roles" class="form-control"
                                                                                 size="2"
                                                                                 multiple name="roles" disabled>
                                                                             <option id="delete-role_admin" value="1">
-                                                                                ROLE_ADMIN
+                                                                                Администратор
                                                                             </option>
                                                                             <option id="delete-role_user" value="2">
-                                                                                ROLE_USER
+                                                                                Пользователь
                                                                             </option>
                                                                         </select>
                                                                     </div>
@@ -232,11 +232,11 @@
                                                             </div>
                                                             <div class="modal-footer">
                                                                 <button id="close_btn-modal-delete" type="button"
-                                                                        class="btn btn-secondary" data-dismiss="modal"> Close
+                                                                        class="btn btn-secondary" data-dismiss="modal"> Закрыть
                                                                 </button>
                                                                 <button id="submit_btn-modal-delete" type="submit"
                                                                         class="btn btn-danger"
-                                                                        data-target="#DeleteForm"> Delete
+                                                                        data-target="#DeleteForm"> Удалить
                                                                 </button>
                                                             </div>
                                                         </div>
@@ -251,43 +251,43 @@
                             <!--                            Форма для добавления юзера-->
                             <div class="tab-pane fade" id="add_new_user">
                                 <div class="card">
-                                    <h5 class="card-header">Add new user</h5>
+                                    <h5 class="card-header">Добавление нового пользователя</h5>
                                     <div class="card-body" align="center">
                                         <form class="add-user-form">
                                             <div class="form-group col-6" align="center">
-                                                <label for="add-user-form-name">Name</label>
+                                                <label for="add-user-form-name">Имя</label>
                                                 <input class="form-control alert-warning"
                                                        id="add-user-form-name">
                                             </div>
                                             <div class="form-group col-6" align="center">
-                                                <label for="add-user-form-last-name">Last Name</label>
+                                                <label for="add-user-form-last-name">Фамилия</label>
                                                 <input class="form-control alert-warning"
                                                        id="add-user-form-last-name">
                                             </div>
                                             <div class="form-group col-6" align="center">
-                                                <label for="add-user-form-age">Age</label>
+                                                <label for="add-user-form-age">Возраст</label>
                                                 <input class="form-control alert-warning"
                                                        id="add-user-form-age">
                                             </div>
                                             <div class="form-group col-6" align="center">
-                                                <label for="add-user-form-email">Email</label>
+                                                <label for="add-user-form-email">Электронная почта</label>
                                                 <input class="form-control alert-warning"
                                                        id="add-user-form-email">
                                             </div>
                                             <div class="form-group col-6" align="center">
-                                                <label for="add-user-form-password">Password</label>
+                                                <label for="add-user-form-password">Пароль</label>
                                                 <input class="form-control" id="add-user-form-password">
                                             </div>
                                             <div class="form-group col-6" align="center">
-                                                <label for="add-user-form-roles">Role</label>
+                                                <label for="add-user-form-roles">Роль</label>
                                                 <select class="form-control" name="roles" multiple required="required"
                                                         size="2" id="add-user-form-roles">
-                                                    <option value="1">ROLE_ADMIN</option>
-                                                    <option value="2">ROLE_USER</option>
+                                                    <option value="1">Администратор</option>
+                                                    <option value="2">Пользователь</option>
                                                 </select>
                                             </div>
-                                            <button type="submit" class="btn btn-success" id="add-btn-submit">Add new
-                                                user
+                                            <button type="submit" class="btn btn-success" id="add-btn-submit">
+                                                Добавить
                                             </button>
                                         </form>
                                     </div>
@@ -300,17 +300,17 @@
                 <!--                Панель юзера-->
                 <div class="tab-pane fade" id="user_panel">
                     <div class="card">
-                        <h5 class="card-header">About user</h5>
+                        <h5 class="card-header">О пользователе</h5>
                         <div class="card-body">
                             <table class="table table-striped">
                                 <thead>
                                 <tr>
-                                    <th scope="col">Id</th>
-                                    <th scope="col">Name</th>
-                                    <th scope="col">Last name</th>
-                                    <th scope="col">Age</th>
-                                    <th scope="col">Email</th>
-                                    <th scope="col">Role</th>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Имя</th>
+                                    <th scope="col">Фамилия</th>
+                                    <th scope="col">Возраст</th>
+                                    <th scope="col">Электронная почта</th>
+                                    <th scope="col">Роль</th>
                                 </tr>
                                 </thead>
 
