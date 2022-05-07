@@ -22,9 +22,9 @@ public class AdminRestController {
         return userService.getAllUsers();
     }
 
-//    ResponseEntity-  специальный класс, который представляет http-ответ.
+//    ResponseEntity - специальный класс, который представляет http-ответ.
 //    Он содержит тело ответа, код состояния, заголовки.
-//    Мы можем использовать его для более тонкой настройки http-ответа
+//    Мы можем использовать его для более тонкой настройки http-ответа.
 
     @GetMapping("/{id_var}")
     public ResponseEntity <User> getUserById (@PathVariable ("id_var") int id) {

@@ -48,8 +48,6 @@ function getAllUsers () {
 // Вызов функции
 getAllUsers();
 
-
-
 //------------- Добавление нового юзера -------------//
 
 //Форма добавления юзера
@@ -108,10 +106,7 @@ addUserForm.addEventListener("submit", (e) => {
         });
 })
 
-
-
 //------------- Удаление и изменение юзеров -------------//
-
 
 const modalEditExitBtn = document.getElementById("exit_btn-modal-edit");
 const modalEditCloseBtn = document.getElementById("close_btn-modal-edit");
@@ -146,7 +141,6 @@ let getDataOfCurrentUser = (id) => {
                 roles: dataUser.roles
             }
             console.log(user)
-
         })
 }
 
@@ -171,16 +165,13 @@ function getRolesFromEditUserForm() {
     return rolesToEdit;
 }
 
-
 //Отслеживание нажатий по кнопкам Edit и Delete в таблице юзеров
 allUsersTable.addEventListener("click", e => {
     e.preventDefault();
     let delButtonIsPressed = e.target.id === 'btn-delete-modal-call';
     let editButtonIsPressed = e.target.id === 'btn-edit-modal-call';
 
-
 //------------- Удаление юзеров -------------//
-
 
     const deleteUsersId = document.getElementById("delete-id")
     const deleteUsersName = document.getElementById("delete-name")
@@ -229,16 +220,13 @@ allUsersTable.addEventListener("click", e => {
         })
     }
 
-
 //------------- Изменение юзеров -------------//
-
 
     const editUsersId = document.getElementById("edit-id");
     const editUsersName = document.getElementById("edit-name");
     const editUsersLastName = document.getElementById("edit-lastName");
     const editUsersAge = document.getElementById("edit-age");
     const editUsersEmail = document.getElementById("edit-email");
-
 
     if (editButtonIsPressed) {
         let currentUserId = e.target.dataset.id;
@@ -293,8 +281,6 @@ allUsersTable.addEventListener("click", e => {
             getAllUsers();
             location.reload();
         })
-
-
     }
 })
 
@@ -351,15 +337,15 @@ let currentUser = () => {
         .then(user => {
             if (user != null) {
                 userPanelData.innerHTML = `
-                                <tr>
-                                    <td> ${user.id} </td>
-                                    <td> ${user.name} </td>
-                                    <td> ${user.lastName} </td>
-                                    <td> ${user.age} </td>
-                                    <td> ${user.email} </td>
-                                    <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : " Админ")} </td>
-                                </tr>
-                        `
+                    <tr>
+                        <td> ${user.id} </td>
+                        <td> ${user.name} </td>
+                        <td> ${user.lastName} </td>
+                        <td> ${user.age} </td>
+                        <td> ${user.email} </td>
+                        <td> ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : " Админ")} </td>
+                    </tr>
+                `
                 authorisedUserData.innerHTML = `
                     <p class="d-inline font-weight-bold">${user.email} с ролями ${user.roles.map((role) => role.name === "ROLE_USER" ? " Юзер" : " Админ")}</p>`
             }
