@@ -26,8 +26,8 @@ public class AdminRestController {
 //    Он содержит тело ответа, код состояния, заголовки.
 //    Мы можем использовать его для более тонкой настройки http-ответа.
 
-    @GetMapping("/{id_var}")
-    public ResponseEntity <User> getUserById (@PathVariable ("id_var") int id) {
+    @GetMapping("/{id}")
+    public ResponseEntity <User> getUserById (@PathVariable ("id") int id) {
         return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
     }
 
@@ -36,13 +36,13 @@ public class AdminRestController {
         return new ResponseEntity<>(userService.add(user), HttpStatus.CREATED);
     }
 
-    @PutMapping ("/{id_var}")
-    public ResponseEntity<User> editUser (@RequestBody User user, @PathVariable ("id_var") int id) {
+    @PutMapping ("/{id}")
+    public ResponseEntity<User> editUser (@RequestBody User user, @PathVariable ("id") int id) {
         return new ResponseEntity<>(userService.update(user, id), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id_var}")
-    public void deleteUser (@PathVariable ("id_var") int id) {
+    @DeleteMapping("/{id}")
+    public void deleteUser (@PathVariable ("id") int id) {
         userService.delete(id);
     }
 }
