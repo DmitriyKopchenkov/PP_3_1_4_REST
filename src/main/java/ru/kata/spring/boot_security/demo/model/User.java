@@ -15,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor()
+@NoArgsConstructor
 @AllArgsConstructor
 public class User implements UserDetails {
 
