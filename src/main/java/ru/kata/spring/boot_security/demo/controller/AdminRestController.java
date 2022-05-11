@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping ("/api/users")
-@PreAuthorize("hasAuthority('ADMIN')")
 @AllArgsConstructor
 public class AdminRestController {
 
@@ -28,17 +27,20 @@ public class AdminRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity <User> getUserById (@PathVariable ("id") int id) {
-        return new ResponseEntity<>(userService.getById(id), HttpStatus.OK);
+        userService.getById(id);
+        return ResponseEntity.ok().build();
     }
 
     @PostMapping
     public ResponseEntity<User> addUser (@RequestBody User user) {
-        return new ResponseEntity<>(userService.add(user), HttpStatus.CREATED);
+        userService.add(user);
+        return ResponseEntity.ok().build();
     }
 
     @PutMapping ("/{id}")
     public ResponseEntity<User> editUser (@RequestBody User user, @PathVariable ("id") int id) {
-        return new ResponseEntity<>(userService.update(user, id), HttpStatus.OK);
+        userService.update(user, id);
+        return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{id}")
