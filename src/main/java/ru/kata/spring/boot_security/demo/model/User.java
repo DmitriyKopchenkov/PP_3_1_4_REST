@@ -15,7 +15,7 @@ import java.util.Set;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor(access = AccessLevel.PROTECTED) // конструктор без параметров нужен только хибернейту
+@NoArgsConstructor()
 @AllArgsConstructor
 public class User implements UserDetails {
 

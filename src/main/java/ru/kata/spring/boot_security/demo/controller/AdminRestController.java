@@ -27,20 +27,17 @@ public class AdminRestController {
 
     @GetMapping("/{id}")
     public ResponseEntity <User> getUserById (@PathVariable ("id") int id) {
-        userService.getById(id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userService.getById(id));
     }
 
     @PostMapping
     public ResponseEntity<User> addUser (@RequestBody User user) {
-        userService.add(user);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userService.add(user));
     }
 
     @PutMapping ("/{id}")
     public ResponseEntity<User> editUser (@RequestBody User user, @PathVariable ("id") int id) {
-        userService.update(user, id);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(userService.update(user, id));
     }
 
     @DeleteMapping("/{id}")
