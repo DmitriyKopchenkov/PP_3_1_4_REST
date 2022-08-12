@@ -7,9 +7,15 @@ import java.util.List;
 
 public interface UserService extends UserDetailsService {
     User add (User user);
-    User update (User user, int id);
-    void delete (int id);
+
+    //изменён на обёртку в связи с последнем замечанием в 2.3.1
+    User update (User user, Long id);
+
+    //изменён на обёртку в связи с последнем замечанием в 2.3.1
+    void delete (Long id);
     List<User> getAllUsers();
-    User getById (int id);
+
+    //изменён на обёртку в связи с последнем замечанием в 2.3.1
+    User getById (Long id);
     User findByUsername (String username);
 }

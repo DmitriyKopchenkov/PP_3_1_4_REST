@@ -7,11 +7,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MyViewController {
     @GetMapping("/admin")
     public String admin() {
+
         return "admin";
     }
 
     @GetMapping("/user")
     public String user() {
+
         return "user";
     }
 }

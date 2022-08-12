@@ -17,6 +17,7 @@ public class UserRestController {
 
     @GetMapping
     public User getAuthorisedUser (Principal principal) {
+
         return userService.findByUsername(principal.getName());
     }
 }

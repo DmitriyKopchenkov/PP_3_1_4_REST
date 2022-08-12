@@ -22,7 +22,7 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private Long id;
 
     @Column(name = "name")
     private String name;
@@ -31,7 +31,7 @@ public class User implements UserDetails {
     private String lastName;
 
     @Column(name="age")
-    private int age;
+    private Long age;
 
     @Column(name = "email", unique = true, length = 100)
     private String email;
@@ -47,7 +47,7 @@ public class User implements UserDetails {
     @ToString.Exclude
     private Set<Role> roles = new HashSet<>();
 
-    public User(String name, String lastName, int age, String email, String password) {
+    public User(String name, String lastName, Long age, String email, String password) {
         this.name = name;
         this.lastName = lastName;
         this.age = age;
@@ -57,31 +57,37 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
+
         return email;
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
+
         return getRoles();
     }
 
     @Override
     public boolean isAccountNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isAccountNonLocked() {
+
         return true;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
+
         return true;
     }
 
     @Override
     public boolean isEnabled() {
+
         return true;
     }
 

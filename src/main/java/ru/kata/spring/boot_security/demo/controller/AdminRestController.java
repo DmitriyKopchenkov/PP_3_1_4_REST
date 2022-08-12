@@ -18,30 +18,29 @@ public class AdminRestController {
 
     @GetMapping()
     public List <User> getAll() {
+
         return userService.getAllUsers();
     }
 
-//    ResponseEntity - специальный класс, который представляет http-ответ.
-//    Он содержит тело ответа, код состояния, заголовки.
-//    Мы можем использовать его для более тонкой настройки http-ответа.
-
     @GetMapping("/{id}")
-    public ResponseEntity <User> getUserById (@PathVariable ("id") int id) {
+    public ResponseEntity <User> getUserById (@PathVariable ("id") Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 
     @PostMapping
     public ResponseEntity<User> addUser (@RequestBody User user) {
+
         return ResponseEntity.ok(userService.add(user));
     }
 
     @PutMapping ("/{id}")
-    public ResponseEntity<User> editUser (@RequestBody User user, @PathVariable ("id") int id) {
+    public ResponseEntity<User> editUser (@RequestBody User user, @PathVariable ("id") Long id) {
         return ResponseEntity.ok(userService.update(user, id));
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser (@PathVariable ("id") int id) {
+    public void deleteUser (@PathVariable ("id") Long id) {
+
         userService.delete(id);
     }
 }

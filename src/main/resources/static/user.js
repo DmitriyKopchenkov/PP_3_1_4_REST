@@ -1,4 +1,4 @@
-const currentUserPanelData = document.getElementById("current_user_panel-data");
+const currentUserPanelData      = document.getElementById("current_user_panel-data");
 const currentAuthorisedUserData = document.getElementById("current_authorised_user-data");
 
 let currentUser = () => {

@@ -6,6 +6,10 @@ import java.util.Set;
 
 public interface RoleService {
     void add (Role role);
-    Role getById (int id);
-    Set<Role> getRoles(int [] ides);
+
+    //изменён на обёртку в связи с последнем замечанием в 2.3.1
+    Role getById (Long id);
+
+    //изменён на обёртку в связи с последнем замечанием в 2.3.1
+    Set<Role> getRoles(Long [] ides);
 }
