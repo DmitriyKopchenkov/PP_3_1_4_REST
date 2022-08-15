@@ -10,7 +10,7 @@ import ru.kata.spring.boot_security.demo.service.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping ("/api/users")
+@RequestMapping ("/api/admin")
 @AllArgsConstructor
 public class AdminRestController {
 
