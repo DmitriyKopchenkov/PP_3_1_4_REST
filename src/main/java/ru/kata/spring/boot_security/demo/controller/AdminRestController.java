@@ -3,7 +3,6 @@ package ru.kata.spring.boot_security.demo.controller;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import ru.kata.spring.boot_security.demo.model.User;
 import ru.kata.spring.boot_security.demo.service.UserService;
@@ -17,9 +16,11 @@ public class AdminRestController {
     private final UserService userService;
 
     @GetMapping()
-    public List <User> getAll() {
-
-        return userService.getAllUsers();
+    public ResponseEntity<List<User>> getAll() {
+        final List<User> allUsers = userService.getAllUsers();
+        return allUsers != null && !allUsers.isEmpty()
+                ? new ResponseEntity<>(allUsers, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("/{id}")
@@ -39,8 +40,9 @@ public class AdminRestController {
     }
 
     @DeleteMapping("/{id}")
-    public void deleteUser (@PathVariable ("id") Long id) {
+    public ResponseEntity<Void> deleteUser (@PathVariable ("id") Long id) {
 
         userService.delete(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 }
