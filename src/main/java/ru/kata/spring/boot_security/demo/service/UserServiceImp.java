@@ -28,16 +28,7 @@ public class UserServiceImp implements UserService {
         return userRepository.save(user);
     }
 
-    @Override
-    public User update(User user, Long id) {
-        return null;
-    }
 
-    @Override
-    @Transactional
-    public User edit(User user) {
-        return userRepository.save(user);
-    }
 
     @Override
     @Transactional

@@ -10,18 +10,7 @@ public interface UserService extends UserDetailsService {
     User add (User user);
 
     //изменён на обёртку в связи с последнем замечанием в 2.3.1
-    User update (User user, Long id);
-
-    //Transactional(readOnly = true)
-    //изменён на обёртку в связи с последнем замечанием в 2.3.1
-    @Transactional
-    User edit(User user);
-
-    //Transactional(readOnly = true)
-    //изменён на обёртку в связи с последнем замечанием в 2.3.1
-    @Transactional
-    User update(User user);
-
+    User update (User user);
     //изменён на обёртку в связи с последнем замечанием в 2.3.1
     void delete (Long id);
     List<User> getAllUsers();
