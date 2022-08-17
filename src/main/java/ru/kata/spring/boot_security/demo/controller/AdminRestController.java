@@ -45,4 +45,5 @@ public class AdminRestController {
         userService.delete(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
 }
